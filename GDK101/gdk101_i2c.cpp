@@ -6,14 +6,17 @@ GDK101_I2C::GDK101_I2C(uint8_t addr) {
 }
 
 void GDK101_I2C::init() {
+  Wire.begin();
   gamma_mod_read(RESET); //
   get_fw_version();
+  delay(10);
 }
 
 bool GDK101_I2C::reset() {
   bool val;
   gamma_mod_read(RESET); //
   val = rw_buffer[0];
+  delay(10);
   return val;
 }
 
@@ -69,16 +72,17 @@ byte GDK101_I2C::get_measuring_time_sec(){
   return mea_time_sec;
 }
 
-float GDK101_I2C::to_rtg(float usv){
-   float rtg;
-   rtg = usv * SV_TO_RTG_CONST;
-   return rtg;
-}
+//float GDK101_I2C::to_rtg(float usv){
+//   float rtg;
+//   rtg = usv * SV_TO_RTG_CONST;
+//   return rtg;
+//}
 
 
 //PRIVATE
 
 void GDK101_I2C::gamma_mod_read(uint8_t reg) {
+  
   byte lg = 2;
   Wire.beginTransmission(_addr);
   Wire.write(reg);
@@ -91,4 +95,5 @@ void GDK101_I2C::gamma_mod_read(uint8_t reg) {
     rw_buffer[i] = Wire.read();
     i++;
   }
+  delay(10);
 };

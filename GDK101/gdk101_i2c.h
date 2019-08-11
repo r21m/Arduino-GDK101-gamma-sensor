@@ -52,6 +52,7 @@ class GDK101_I2C
   private:
     uint8_t _addr;
     byte rw_buffer[2] = {0, 0};
+    byte buffer[2] = {0, 0};
     void gamma_mod_read(uint8_t _reg);
 };
 
