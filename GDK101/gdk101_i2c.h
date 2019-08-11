@@ -35,24 +35,22 @@ class GDK101_I2C
     float get_10min_avg();
     float get_1min_avg();
     bool  get_vib();
-    byte  get_status();
-    byte  get_measuring_time_min();
-    byte  get_measuring_time_sec();
+    uint8_t  get_status();
+    uint8_t  get_measuring_time_min();
+    uint8_t  get_measuring_time_sec();
     float to_rtg(float usv);
 
     float fw_version = 0.0f;
     float mea_10min_avg;
     float mea_1min_avg;
-    byte  gdk_status;
+    uint8_t  gdk_status;
     bool  vib = false; 
-    byte  mea_time_min;
-    byte  mea_time_sec;
-    String measuring_unit = ("uSv/hr");
+    uint8_t  mea_time_min;
+    uint8_t  mea_time_sec;
         
   private:
     uint8_t _addr;
-    byte rw_buffer[2] = {0, 0};
-    byte buffer[2] = {0, 0};
+    uint8_t rw_buffer[2] = {0, 0};
     void gamma_mod_read(uint8_t _reg);
 };
 

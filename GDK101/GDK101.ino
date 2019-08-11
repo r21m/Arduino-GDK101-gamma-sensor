@@ -1,10 +1,6 @@
 
 #include "gdk101_i2c.h"
 
-//
-//http://www.eleparts.co.kr/data/goods_old/design/product_file/Hoon/AN_GDK101_V1.0_I2C.pdf
-//
-
 //A0 Short, A1 Short : 0x18
 //A0 Open,  A1 Short : 0x19
 //A0 Short, A1 Open  : 0x1A
@@ -30,6 +26,7 @@ void setup() {
   Serial.begin(115200);
   gdk101.init();
   //gdk101.reset();
+  fw_vers = gdk101.get_fw_version();
 }
 
 void loop() {
@@ -46,7 +43,7 @@ void loop() {
   sprintf(out_buff, "Radiation uSv/h 10min: %0.2f \t min: %0.2f ", avg10min, avg1min);
   Serial.println(out_buff);
 
-  sprintf(out_buff, "Status: %i vibration: %i version %0.2f", _status, vibration, fw_vers);
+  sprintf(out_buff, "Status: %i vibration: %i version %0.1f", _status, vibration, fw_vers);
   Serial.println(out_buff);
   Serial.println();
   
